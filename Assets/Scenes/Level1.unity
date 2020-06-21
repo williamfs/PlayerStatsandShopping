@@ -545,6 +545,9 @@ MonoBehaviour:
   - N_Villager A
   - Hi..
   - Can you do me a favor?
+  - N_Teena
+  - Yeah, how can I help you?
+  - N_Villager A
   - I need some apple to make an apple pie
   - You can find apple in the east forest.
 --- !u!1 &785125138
@@ -639,7 +642,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1336069109
 Transform:
   m_ObjectHideFlags: 0
@@ -9564,6 +9567,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   storyLine: []
+  canTalk: 0
+  activeNPC: {fileID: 0}
   dialogue: {fileID: 159559949}
   dialogueText: {fileID: 2045842784}
   nameText: {fileID: 1925395894}
