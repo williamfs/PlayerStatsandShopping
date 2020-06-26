@@ -8,13 +8,24 @@ public class ShopManager : MonoBehaviour
     public GameObject shopingPanel;
     public string[] shopItems = new string[40];
     public Button[] itemButtons;
+    public Image[] itemImages;
+    public Item[] itemPrefabs;
+
+
+    public Text descriptionText;
+
+    public Item activeItem;
 
     private bool hasOpen;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        itemImages = new Image[itemButtons.Length];
+        for (int i = 0; i < itemImages.Length; i++)
+        {
+            itemImages[i] = itemButtons[i].transform.GetChild(0).GetComponent<Image>();
+        }
     }
 
     // Update is called once per frame
@@ -50,12 +61,19 @@ public class ShopManager : MonoBehaviour
         {
             if (shopItems[i] != "")
             {
-                itemButtons[i].gameObject.SetActive(true);
-
-                itemButtons[i].GetComponentInChildren<Text>().text = shopItems[i];
+                for (int j = 0; j < itemPrefabs.Length; j++)
+                {
+                    if (shopItems[i] == itemPrefabs[j].itemName)
+                    {
+                        itemImages[i].color = new Color(1, 1, 1, 1);
+                        itemImages[i].sprite = itemPrefabs[j].sprite;
+                        itemButtons[i].GetComponentInChildren<Text>().text = itemPrefabs[j].number.ToString();
+                    }
+                }
             }
             else
             {
+                itemImages[i].color = new Color(1, 1, 1, 0);
                 itemButtons[i].GetComponentInChildren<Text>().text = "";
             }
         }
@@ -96,6 +114,21 @@ public class ShopManager : MonoBehaviour
                     }
                 }
                 haveSpace = false;
+            }
+        }
+
+    }
+
+    public void Pressed(int shopIndex)
+    {
+        if (shopItems[shopIndex] != "")
+        {
+            for (int j = 0; j < itemPrefabs.Length; j++)
+            {
+                if (itemPrefabs[j].itemName == shopItems[shopIndex])
+                {
+                    descriptionText.text = itemPrefabs[j].description;
+                }
             }
         }
 
