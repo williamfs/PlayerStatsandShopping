@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class ShopManager : MonoBehaviour
 {
     public GameObject shopingPanel;
-    public string[] shopItems = new string[40];
+    public string[] shopItems = new string[32];
     public Button[] itemButtons;
     public Image[] itemImages;
     public Item[] itemPrefabs;
@@ -31,11 +31,11 @@ public class ShopManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!hasOpen && Input.GetKeyDown(KeyCode.I))
+        if (!hasOpen && Input.GetKeyDown(KeyCode.P))
         {
             OpenShoppingMenu();
         }
-        else if (hasOpen && Input.GetKeyDown(KeyCode.I))
+        else if (hasOpen && Input.GetKeyDown(KeyCode.P))
         {
             CloseShoppingMenu();
         }
@@ -128,8 +128,10 @@ public class ShopManager : MonoBehaviour
                 if (itemPrefabs[j].itemName == shopItems[shopIndex])
                 {
                     descriptionText.text = itemPrefabs[j].description;
+                    activeItem = itemPrefabs[j];
                 }
             }
+
         }
 
     }
