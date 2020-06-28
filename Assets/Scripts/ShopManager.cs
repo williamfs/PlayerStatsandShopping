@@ -119,7 +119,7 @@ public class ShopManager : MonoBehaviour
 
     }
 
-    public void Pressed(int shopIndex)
+    public void Pressed(int shopIndex)  // When you pressed the button on shop menu, show the detail of that item
     {
         if (shopItems[shopIndex] != "")
         {
@@ -131,8 +131,15 @@ public class ShopManager : MonoBehaviour
                     activeItem = itemPrefabs[j];
                 }
             }
-
         }
+    }
 
+    public void BuyItem()  // Pressed the Buy button
+    {
+        // TODO: check if you have enough money
+        GameManager.instance.AddItems(activeItem);
+        itemPrefabs[0].number--;
+
+        UpdateItemButton();
     }
 }

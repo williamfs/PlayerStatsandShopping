@@ -4,14 +4,24 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public Dictionary<Item, int> items = new Dictionary<Item, int>();
+    public static GameManager instance;
+
+    public Dictionary<Item, int> inventory = new Dictionary<Item, int>();  // item, amount
 
     public Item[] itemPrefabs;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     // Update is called once per frame
@@ -19,23 +29,24 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.O))
         {
-            AddItems(itemPrefabs[0]);
+            //Debug.Log(inventory[itemPrefabs[0]] + " has " + inventory[itemToAdd]);
+
         }
     }
 
-    public void AddItems(Item itemToAdd)
+    public void AddItems(Item itemToAdd, int amount = 1)
     {
-        if (!items.ContainsKey(itemToAdd))
+        if (!inventory.ContainsKey(itemToAdd))
         {
-            items.Add(itemToAdd, 1);
+            inventory.Add(itemToAdd, amount);
         }
         else
         {
-            int amount = items[itemToAdd];
-            amount++;
-            items[itemToAdd] = amount;
+            int backpackAmount = inventory[itemToAdd];
+            backpackAmount += amount;
+            inventory[itemToAdd] = backpackAmount;
         }
 
-        Debug.Log(itemToAdd.itemName + " has " + items[itemToAdd]);
+        Debug.Log(itemToAdd.itemName + " has " + inventory[itemToAdd]);
     }
 }
