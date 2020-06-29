@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1125013832320577083}
   - component: {fileID: 1125013832320577082}
-  - component: {fileID: 1125013832320577076}
   m_Layer: 0
   m_Name: Wood armor
   m_TagString: Untagged
@@ -82,20 +81,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1125013832320577076
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1125013832320577081}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc007d79df7d48a488ffe2c6f6278b44, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemName: Wood armor
-  description: Weak defense
-  number: 2
-  cost: 15
-  sprite: {fileID: 21300010, guid: 0bc4ed27aef38a44bb72e80f9beb5326, type: 3}

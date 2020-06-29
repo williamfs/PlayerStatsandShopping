@@ -5548,19 +5548,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shopingPanel: {fileID: 1372072659}
   shopItems:
-  - HP Potion
+  - 
   - 
   - 
   - 
   - MP Potion
   - 
+  - HP Potion
   - 
-  - Iron blade
   - Wood sword
   - 
   - 
   - 
-  - 
+  - Iron blade
   - 
   - 
   - 
@@ -5614,15 +5614,45 @@ MonoBehaviour:
   - {fileID: 2108389856}
   - {fileID: 266190736}
   itemImages: []
-  itemPrefabs:
-  - {fileID: 1359803841007718323, guid: 42fcc0cac3caafe49b51e3f5c84f60a7, type: 3}
-  - {fileID: 5510841599266528625, guid: 0c5f088f976bd5940a6583ec9d45f9f0, type: 3}
-  - {fileID: 5469378540999051087, guid: 28c3febae39f33544adcbdb59882f44a, type: 3}
-  - {fileID: 8946361425173394040, guid: 6e037a14453f3a749bc557134f687e30, type: 3}
-  - {fileID: 1125013832320577076, guid: aa55746366012a5479f46b3f56989631, type: 3}
-  - {fileID: 6461092759638903454, guid: 7eacca8b9052cac489c467320769fdb1, type: 3}
+  itemsInfo:
+  - itemName: HP Potion
+    description: Heal 50 HP
+    number: 5
+    cost: 10
+    sprite: {fileID: 21300000, guid: 0bc4ed27aef38a44bb72e80f9beb5326, type: 3}
+  - itemName: MP Potion
+    description: Recover 20 MP
+    number: 4
+    cost: 15
+    sprite: {fileID: 21300004, guid: 0bc4ed27aef38a44bb72e80f9beb5326, type: 3}
+  - itemName: Wood armor
+    description: Weak defecne
+    number: 3
+    cost: 50
+    sprite: {fileID: 21300010, guid: 0bc4ed27aef38a44bb72e80f9beb5326, type: 3}
+  - itemName: Iron armor
+    description: Strong defence
+    number: 1
+    cost: 70
+    sprite: {fileID: 21300014, guid: 0bc4ed27aef38a44bb72e80f9beb5326, type: 3}
+  - itemName: Wood sword
+    description: Weak weapon
+    number: 2
+    cost: 20
+    sprite: {fileID: 21300074, guid: 0bc4ed27aef38a44bb72e80f9beb5326, type: 3}
+  - itemName: Iron blade
+    description: Strong weapon
+    number: 1
+    cost: 60
+    sprite: {fileID: 21300078, guid: 0bc4ed27aef38a44bb72e80f9beb5326, type: 3}
   descriptionText: {fileID: 1078488052}
-  activeItem: {fileID: 0}
+  activeItem:
+    itemName: 
+    description: 
+    number: 0
+    cost: 0
+    sprite: {fileID: 0}
+  shopIndex: 0
 --- !u!4 &488884087
 Transform:
   m_ObjectHideFlags: 0
@@ -6033,6 +6063,39 @@ MonoBehaviour:
   inventoryPanel: {fileID: 1711018927}
   inventory: {fileID: 2121613279}
   playerStats: {fileID: 447040757}
+  items:
+  - {fileID: 1853660755}
+  - {fileID: 1572511789}
+  - {fileID: 1381203657}
+  - {fileID: 1931248272}
+  - {fileID: 1366571793}
+  - {fileID: 582193117}
+  - {fileID: 110628644}
+  - {fileID: 1533264798}
+  - {fileID: 1186234828}
+  - {fileID: 952442547}
+  - {fileID: 655739248}
+  - {fileID: 288787578}
+  - {fileID: 1777317076}
+  - {fileID: 828239025}
+  - {fileID: 1482567258}
+  - {fileID: 403274490}
+  - {fileID: 1980848606}
+  - {fileID: 1334723281}
+  - {fileID: 1794579483}
+  - {fileID: 2121419856}
+  - {fileID: 799176783}
+  - {fileID: 1120505967}
+  - {fileID: 547960136}
+  - {fileID: 403820296}
+  - {fileID: 744829123}
+  - {fileID: 10821009}
+  - {fileID: 1072016585}
+  - {fileID: 250518159}
+  - {fileID: 182618977}
+  - {fileID: 985542508}
+  - {fileID: 1138632786}
+  - {fileID: 237795553}
 --- !u!1 &508541481
 GameObject:
   m_ObjectHideFlags: 0
@@ -20661,12 +20724,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemPrefabs:
-  - {fileID: 1359803841007718323, guid: 42fcc0cac3caafe49b51e3f5c84f60a7, type: 3}
-  - {fileID: 5510841599266528625, guid: 0c5f088f976bd5940a6583ec9d45f9f0, type: 3}
-  - {fileID: 5469378540999051087, guid: 28c3febae39f33544adcbdb59882f44a, type: 3}
-  - {fileID: 8946361425173394040, guid: 6e037a14453f3a749bc557134f687e30, type: 3}
-  - {fileID: 1125013832320577076, guid: aa55746366012a5479f46b3f56989631, type: 3}
-  - {fileID: 6461092759638903454, guid: 7eacca8b9052cac489c467320769fdb1, type: 3}
+  - itemName: 
+    description: 
+    number: 0
+    cost: 0
+    sprite: {fileID: 0}
+  - itemName: 
+    description: 
+    number: 0
+    cost: 0
+    sprite: {fileID: 0}
+  - itemName: 
+    description: 
+    number: 0
+    cost: 0
+    sprite: {fileID: 0}
+  - itemName: 
+    description: 
+    number: 0
+    cost: 0
+    sprite: {fileID: 0}
+  - itemName: 
+    description: 
+    number: 0
+    cost: 0
+    sprite: {fileID: 0}
+  - itemName: 
+    description: 
+    number: 0
+    cost: 0
+    sprite: {fileID: 0}
 --- !u!4 &1478591006
 Transform:
   m_ObjectHideFlags: 0

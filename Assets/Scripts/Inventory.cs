@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class Inventory : MonoBehaviour
     private bool hasOpen;
     public GameObject inventory;
     public GameObject playerStats;
+
+    public GameObject[] items;
 
     // Start is called before the first frame update
     void Start()
@@ -41,6 +44,19 @@ public class Inventory : MonoBehaviour
     {
         playerStats.SetActive(false);
         inventory.SetActive(true);
+
+        // Update what dictionary have and display on this panel
+        DisplayInventory();
+    }
+
+    private void DisplayInventory()
+    {
+        for (int i = 0; i < GameManager.instance.Inventory2.Count; i++)
+        {
+            items[i].GetComponentInChildren<Image>().sprite = GameManager.instance.Inventory2[i].sprite;
+            items[i].GetComponentInChildren<Text>().text = GameManager.instance.Inventory2[i].number.ToString();
+        }
+
     }
 
     public void OpenPlayerStats()
