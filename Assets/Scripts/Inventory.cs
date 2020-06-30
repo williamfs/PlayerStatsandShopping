@@ -37,6 +37,7 @@ public class Inventory : MonoBehaviour
         {
             inventoryPanel.SetActive(false);
         }
+        DisplayInventory();
         hasOpen = !hasOpen;
     }
 
@@ -53,6 +54,7 @@ public class Inventory : MonoBehaviour
     {
         for (int i = 0; i < GameManager.instance.Inventory.Count; i++)
         {
+            items[i].GetComponentInChildren<Image>().color = new Color(1, 1, 1, 1);
             items[i].GetComponentInChildren<Image>().sprite = GameManager.instance.Inventory[i].sprite;
             items[i].GetComponentInChildren<Text>().text = GameManager.instance.Inventory[i].amount.ToString();
         }

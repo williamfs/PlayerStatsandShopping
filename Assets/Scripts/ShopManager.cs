@@ -153,20 +153,21 @@ public class ShopManager : MonoBehaviour
     {
         // TODO: check if you have enough money
 
-        for (int i = 0; i < shopItems.Length; i++)
+        for (int i = 0; i < itemsInfo.Length; i++)
         {
-            if (shopItems[shopIndex] == itemsInfo[i].itemName && itemsInfo[i].number > 0)
+            if (shopItems[this.shopIndex] == itemsInfo[i].itemName && itemsInfo[i].number > 0)
             {
                 GameManager.instance.AddItems(activeItem);
                 itemsInfo[i].number--;
 
                 if (itemsInfo[i].number <= 0)
                 {
-                    shopItems[shopIndex] = "";
+                    shopItems[this.shopIndex] = "";
                 }
 
                 SortShopItems();
                 UpdateItemButton();
+                Pressed(this.shopIndex);
                 break;
             }
         }
