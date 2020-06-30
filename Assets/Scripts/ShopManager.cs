@@ -6,13 +6,11 @@ using UnityEngine.UI;
 public class ShopManager : MonoBehaviour
 {
     public GameObject shopingPanel;
-    public string[] shopItems = new string[32];
-    public Button[] itemButtons;
-    public Image[] itemImages;
-    public Item[] itemsInfo;
-
-
     public Text descriptionText;
+
+    public string[] shopItems = new string[32];
+    public ItemButton[] itemButtons;
+    public Item[] itemsInfo;
 
     public Item activeItem;
     public int shopIndex;
@@ -22,11 +20,7 @@ public class ShopManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        itemImages = new Image[itemButtons.Length];
-        for (int i = 0; i < itemImages.Length; i++)
-        {
-            itemImages[i] = itemButtons[i].transform.GetChild(0).GetComponent<Image>();
-        }
+        AssignButtonValues();
     }
 
     // Update is called once per frame
@@ -108,15 +102,15 @@ public class ShopManager : MonoBehaviour
                     {
                         if (itemsInfo[j].number > 0)
                         {
-                            itemImages[i].color = new Color(1, 1, 1, 1);
-                            itemImages[i].sprite = itemsInfo[j].sprite;
+                            itemButtons[i].buttonImage.color = new Color(1, 1, 1, 1);
+                            itemButtons[i].buttonImage.sprite = itemsInfo[j].sprite;
                             itemButtons[i].GetComponentInChildren<Text>().text = itemsInfo[j].number.ToString();
                             break;
                         }
                         else
                         {
-                            itemImages[i].color = new Color(1, 1, 1, 0);
-                            itemImages[i].sprite = itemsInfo[j].sprite;
+                            itemButtons[i].buttonImage.color = new Color(1, 1, 1, 0);
+                            itemButtons[i].buttonImage.sprite = itemsInfo[j].sprite;
                             shopItems[i] = "";
 
                             break;
@@ -127,49 +121,46 @@ public class ShopManager : MonoBehaviour
             }
             else
             {
-                itemImages[i].color = new Color(1, 1, 1, 0);
+                itemButtons[i].buttonImage.color = new Color(1, 1, 1, 0);
                 itemButtons[i].GetComponentInChildren<Text>().text = "";
             }
         }
     }
 
-    public void Pressed(int shopIndex)  // When you pressed the button on shop menu, show the detail of that item
-    {
-        if (shopItems[shopIndex] != "")
-        {
-            for (int j = 0; j < itemsInfo.Length; j++)
-            {
-                if (itemsInfo[j].itemName == shopItems[shopIndex])
-                {
-                    descriptionText.text = itemsInfo[j].description;
-                    activeItem = itemsInfo[j];
-                    this.shopIndex = shopIndex;
-                }
-            }
-        }
-    }
+
 
     public void BuyItem()  // Pressed the Buy button
     {
         // TODO: check if you have enough money
-
-        for (int i = 0; i < itemsInfo.Length; i++)
+        if (shopIndex >= 0)
         {
-            if (shopItems[this.shopIndex] == itemsInfo[i].itemName && itemsInfo[i].number > 0)
+            for (int i = 0; i < itemsInfo.Length; i++)
             {
-                GameManager.instance.AddItems(activeItem);
-                itemsInfo[i].number--;
-
-                if (itemsInfo[i].number <= 0)
+                if (shopItems[this.shopIndex] == itemsInfo[i].itemName && itemsInfo[i].number > 0)
                 {
-                    shopItems[this.shopIndex] = "";
-                }
+                    GameManager.instance.AddItems(activeItem);
+                    itemsInfo[i].number--;
 
-                SortShopItems();
-                UpdateItemButton();
-                Pressed(this.shopIndex);
-                break;
+                    if (itemsInfo[i].number <= 0)
+                    {
+                        shopItems[this.shopIndex] = "";
+                    }
+
+                    SortShopItems();
+                    UpdateItemButton();
+                    itemButtons[shopIndex].Pressed();
+                    break;
+                }
             }
+        }
+
+    }
+
+    public void AssignButtonValues()
+    {
+        for (int i = 0; i < itemButtons.Length; i++)
+        {
+            itemButtons[i].buttonValue = i;
         }
     }
 }

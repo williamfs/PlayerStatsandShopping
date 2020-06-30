@@ -23,8 +23,6 @@ public class GameManager : MonoBehaviour
 
     public List<ItemInBackPack> Inventory = new List<ItemInBackPack>();
 
-    public Item[] itemPrefabs;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -50,7 +48,6 @@ public class GameManager : MonoBehaviour
 
     public void AddItems(Item itemToAdd, int amount = 1)  // Called by ShopManager when you hit Buy button
     {
-        //ItemInBackPack itemCheck = new ItemInBackPack(itemToAdd);
         if (Inventory.Count > 0)
         {
             for (int i = 0; i < Inventory.Count; i++)
