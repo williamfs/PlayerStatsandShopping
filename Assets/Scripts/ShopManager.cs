@@ -157,8 +157,7 @@ public class ShopManager : MonoBehaviour
         {
             if (shopItems[shopIndex] == itemsInfo[i].itemName && itemsInfo[i].number > 0)
             {
-                //BackPack item = new BackPack(activeItem);
-                GameManager.instance.AddItems2(activeItem);
+                GameManager.instance.AddItems(activeItem);
                 itemsInfo[i].number--;
 
                 if (itemsInfo[i].number <= 0)
@@ -171,6 +170,5 @@ public class ShopManager : MonoBehaviour
                 break;
             }
         }
-
     }
 }

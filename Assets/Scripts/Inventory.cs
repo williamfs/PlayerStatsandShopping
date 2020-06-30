@@ -49,14 +49,19 @@ public class Inventory : MonoBehaviour
         DisplayInventory();
     }
 
-    private void DisplayInventory()
+    private void DisplayInventory() // 從GameManager的List拿取資料 並顯示在UI上
     {
-        for (int i = 0; i < GameManager.instance.Inventory2.Count; i++)
+        for (int i = 0; i < GameManager.instance.Inventory.Count; i++)
         {
-            items[i].GetComponentInChildren<Image>().sprite = GameManager.instance.Inventory2[i].sprite;
-            items[i].GetComponentInChildren<Text>().text = GameManager.instance.Inventory2[i].number.ToString();
+            items[i].GetComponentInChildren<Image>().sprite = GameManager.instance.Inventory[i].sprite;
+            items[i].GetComponentInChildren<Text>().text = GameManager.instance.Inventory[i].amount.ToString();
         }
 
+        for (int j = GameManager.instance.Inventory.Count; j < items.Length; j++)
+        {
+            items[j].GetComponentInChildren<Image>().color = new Color(1, 1, 1, 0);
+            items[j].GetComponentInChildren<Text>().text = "";
+        }
     }
 
     public void OpenPlayerStats()
@@ -64,6 +69,4 @@ public class Inventory : MonoBehaviour
         inventory.SetActive(false);
         playerStats.SetActive(true);
     }
-
-
 }

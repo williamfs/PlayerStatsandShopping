@@ -3,23 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class BackPack
+public class ItemInBackPack
 {
-    public BackPack(Item newItem)
-    {
-        this.item = newItem;
-    }
-
-    public Item item;
+    public string itemName;
     public int amount;
+    public Sprite sprite;
+
+    public ItemInBackPack(Item item)
+    {
+        this.itemName = item.itemName;
+        this.amount = 1;
+        this.sprite = item.sprite;
+    }
 }
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    //public List<BackPack> Inventory = new List<BackPack>();
-    public List<Item> Inventory2 = new List<Item>();
+    public List<ItemInBackPack> Inventory = new List<ItemInBackPack>();
 
     public Item[] itemPrefabs;
 
@@ -43,41 +45,31 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.O))
         {
             //Debug.Log(inventory[itemPrefabs[0]] + " has " + inventory[itemToAdd]);
-
         }
     }
 
-    //public void AddItems(BackPack itemToAdd, int amount = 1)
-    //{
-    //    if (!Inventory.Contains(itemToAdd))
-    //    {
-    //        Inventory.Add(itemToAdd);
-    //    }
-    //    else
-    //    {
-    //        int index = Inventory.IndexOf(itemToAdd);
-    //        int backpackAmount = Inventory[index].amount;
-    //        backpackAmount += amount;
-    //        Inventory[index].amount = backpackAmount;
-    //        Debug.Log(Inventory[index] + " has " + Inventory[index].amount);
-    //    }
-
-    //}
-
-    public void AddItems2(Item itemToAdd, int amount = 1)
+    public void AddItems(Item itemToAdd, int amount = 1)  // Called by ShopManager when you hit Buy button
     {
-        if (!Inventory2.Contains(itemToAdd))
+        //ItemInBackPack itemCheck = new ItemInBackPack(itemToAdd);
+        if (Inventory.Count > 0)
         {
-            Inventory2.Add(itemToAdd);
+            for (int i = 0; i < Inventory.Count; i++)
+            {
+                if (Inventory[i].itemName == itemToAdd.itemName)
+                {
+                    Inventory[i].amount++;
+                    return;
+                }
+            }
+
+            // new item added
+            ItemInBackPack newItem = new ItemInBackPack(itemToAdd);
+            Inventory.Add(newItem);
         }
         else
         {
-            int index = Inventory2.IndexOf(itemToAdd);
-            int backpackAmount = Inventory2[index].number;
-            backpackAmount += amount;
-            Inventory2[index].number = backpackAmount;
-            Debug.Log(Inventory2[index] + " has " + Inventory2[index].number);
+            ItemInBackPack newItem = new ItemInBackPack(itemToAdd);
+            Inventory.Add(newItem);
         }
-
     }
 }
