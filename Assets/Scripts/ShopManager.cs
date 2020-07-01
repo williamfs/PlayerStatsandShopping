@@ -5,8 +5,10 @@ using UnityEngine.UI;
 
 public class ShopManager : MonoBehaviour
 {
-    public GameObject shopingPanel;
-    public Text descriptionText;
+    public static ShopManager instance;
+    public GameObject shopingPanel, notificationPanel;
+    public Text descriptionText, costText, moneyText;
+    public ItemButton firstButton;
 
     public string[] shopItems = new string[32];
     public ItemButton[] itemButtons;
@@ -16,6 +18,19 @@ public class ShopManager : MonoBehaviour
     public int shopIndex;
 
     private bool hasOpen;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -42,6 +57,7 @@ public class ShopManager : MonoBehaviour
         shopingPanel.SetActive(true);
         SortShopItems();
         UpdateItemButton();
+        firstButton.Pressed();
     }
 
     public void CloseShoppingMenu()
@@ -125,31 +141,40 @@ public class ShopManager : MonoBehaviour
                 itemButtons[i].GetComponentInChildren<Text>().text = "";
             }
         }
+
+        moneyText.text = GameManager.instance.currentMoney + "g";
+        costText.text = itemsInfo[shopIndex].cost + "g";
     }
-
-
 
     public void BuyItem()  // Pressed the Buy button
     {
-        // TODO: check if you have enough money
         if (shopIndex >= 0)
         {
             for (int i = 0; i < itemsInfo.Length; i++)
             {
-                if (shopItems[this.shopIndex] == itemsInfo[i].itemName && itemsInfo[i].number > 0)
+                if (shopItems[this.shopIndex] == itemsInfo[i].itemName && itemsInfo[i].number > 0)  // Find the exact item in itemInfo
                 {
-                    GameManager.instance.AddItems(activeItem);
-                    itemsInfo[i].number--;
-
-                    if (itemsInfo[i].number <= 0)
+                    if (GameManager.instance.currentMoney >= itemsInfo[i].cost) // Check if have enough money
                     {
-                        shopItems[this.shopIndex] = "";
-                    }
+                        GameManager.instance.currentMoney -= itemsInfo[i].cost;
+                        GameManager.instance.AddItems(activeItem);
+                        itemsInfo[i].number--;
 
-                    SortShopItems();
-                    UpdateItemButton();
-                    itemButtons[shopIndex].Pressed();
-                    break;
+                        if (itemsInfo[i].number <= 0)
+                        {
+                            shopItems[this.shopIndex] = "";
+                        }
+
+                        SortShopItems();
+                        UpdateItemButton();
+                        itemButtons[shopIndex].Pressed();
+                        break;
+                    }
+                    else
+                    {
+                        // Show that you don't have enough money
+                        notificationPanel.SetActive(true);
+                    }
                 }
             }
         }

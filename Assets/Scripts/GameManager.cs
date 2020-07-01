@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
+    public int currentMoney = 1000;
     public List<ItemInBackPack> Inventory = new List<ItemInBackPack>();
 
     // Start is called before the first frame update

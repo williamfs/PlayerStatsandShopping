@@ -9,35 +9,25 @@ public class ItemButton : MonoBehaviour
     public Text amountText;
     public int buttonValue;
 
-    // Start is called before the first frame update
-    void Start()
+    public void Pressed()  // Called in editor OnClick()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void Pressed()
-    {
-        if (FindObjectOfType<ShopManager>().shopItems[buttonValue] != "")
+        if (ShopManager.instance.shopItems[buttonValue] != "")
         {
-            for (int j = 0; j < FindObjectOfType<ShopManager>().itemsInfo.Length; j++)
+            for (int j = 0; j < ShopManager.instance.itemsInfo.Length; j++)
             {
-                if (FindObjectOfType<ShopManager>().itemsInfo[j].itemName == FindObjectOfType<ShopManager>().shopItems[buttonValue])
+                if (ShopManager.instance.itemsInfo[j].itemName == ShopManager.instance.shopItems[buttonValue])
                 {
-                    FindObjectOfType<ShopManager>().descriptionText.text = FindObjectOfType<ShopManager>().itemsInfo[j].description;
-                    FindObjectOfType<ShopManager>().activeItem = FindObjectOfType<ShopManager>().itemsInfo[j];
-                    FindObjectOfType<ShopManager>().shopIndex = buttonValue;
+                    ShopManager.instance.descriptionText.text = ShopManager.instance.itemsInfo[j].description;
+                    ShopManager.instance.costText.text = ShopManager.instance.itemsInfo[j].cost + "g";
+                    ShopManager.instance.activeItem = ShopManager.instance.itemsInfo[j];
+                    ShopManager.instance.shopIndex = buttonValue;
+                    return;  // If finds the corresponding item, then return, no need to keep finding
                 }
             }
         }
         else
         {
-            FindObjectOfType<ShopManager>().shopIndex = -1;
+            ShopManager.instance.shopIndex = -1;
         }
     }
 }
