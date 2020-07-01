@@ -64,6 +64,7 @@ public class ShopManager : MonoBehaviour
     {
         hasOpen = false;
         shopingPanel.SetActive(false);
+        shopIndex = 0;
     }
 
     private void SortShopItems()
